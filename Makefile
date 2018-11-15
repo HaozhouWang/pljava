@@ -31,6 +31,8 @@ JAVA_HOME := $(PLJAVA_HOME)
 PLJAVADATA = $(DESTDIR)$(datadir)/pljava
 PLJAVALIB  = $(DESTDIR)$(pkglibdir)/java
 
+EXTENSION = pljava
+
 REGRESS_OPTS = --dbname=pljava_test --create-role=pljava_test
 REGRESS = pljava_init pljava_functions pljava_test
 REGRESS_DIR = $(top_builddir)
@@ -56,6 +58,9 @@ install: installdirs install-lib
 	$(INSTALL_DATA) '$(PROJDIR)/gpdb/installation/install.sql'                                    '$(PLJAVADATA)'
 	$(INSTALL_DATA) '$(PROJDIR)/gpdb/installation/uninstall.sql'                                  '$(PLJAVADATA)'
 	$(INSTALL_DATA) '$(PROJDIR)/gpdb/installation/examples.sql'                                   '$(PLJAVADATA)'
+	$(INSTALL_DATA) '$(PROJDIR)/gpdb/installation/pljava--1.0.0.sql'                              '$(DESTDIR)$(datadir)/extension'
+	$(INSTALL_DATA) '$(PROJDIR)/gpdb/installation/pljava--unpackaged--1.0.0.sql'                  '$(DESTDIR)$(datadir)/extension'
+	$(INSTALL_DATA) '$(PROJDIR)/gpdb/installation/pljava.control'                                 '$(DESTDIR)$(datadir)/extension'
 	find $(PROJDIR)/docs -name "*.html" -exec $(INSTALL_DATA) {} '$(PLJAVADATA)/docs' \;
 
 uninstall: uninstall-lib 
